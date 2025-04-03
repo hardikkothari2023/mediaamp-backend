@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from app.config import Config
@@ -17,6 +17,14 @@ def create_app():
     from app.models.user import User  # Ensure correct import path
 
     from app.routes import api_blueprint  # Import routes
-    app.register_blueprint(api_blueprint)  # Register routes
+    app.register_blueprint(api_blueprint)
+
+    # 🔹 Add a default route to avoid 404 errors
+    @app.route('/', methods=['GET'])
+    def home():
+        return jsonify({"message": "Flask is running!"})
 
     return app
+
+# Ensure Flask detects the application
+app = create_app()
