@@ -1,10 +1,12 @@
-from flask import Flask, jsonify
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_jwt_extended import JWTManager
 from app.config import Config
 
 db = SQLAlchemy()
 migrate = Migrate()
+jwt = JWTManager()
 
 def create_app():
     app = Flask(__name__)
@@ -12,19 +14,13 @@ def create_app():
 
     db.init_app(app)
     migrate.init_app(app, db)
+    jwt.init_app(app)  # Initialize JWT
 
-    # 🔹 Import models AFTER initializing db
-    from app.models.user import User  # Ensure correct import path
+    # Import models AFTER initializing db
+    from app.models.user import User
 
-    from app.routes import api_blueprint  # Import routes
+    # Import and register Blueprint
+    from app.routes import api_blueprint
     app.register_blueprint(api_blueprint)
 
-    # 🔹 Add a default route to avoid 404 errors
-    @app.route('/', methods=['GET'])
-    def home():
-        return jsonify({"message": "Flask is running!"})
-
     return app
-
-# Ensure Flask detects the application
-app = create_app()
