@@ -6,7 +6,7 @@ class TaskLogger(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     task_id = db.Column(db.Integer, db.ForeignKey('task_manager.id'), nullable=False, index=True)
-    log_date = db.Column(db.Date, nullable=False)
+    log_date = db.Column(db.Date, nullable=False)  # ✅ This is the column we'll filter by
     status_snapshot = db.Column(db.String(50))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
