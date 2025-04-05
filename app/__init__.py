@@ -6,15 +6,14 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    # Initialize extensions
+    
     db.init_app(app)
     migrate.init_app(app, db)
     jwt.init_app(app)
 
-    # Import models to register them with SQLAlchemy
+   
     from app.models import user, task_manager, task_logger
-
-    # Register Blueprints
+ 
     from app.routes import api_blueprint
     app.register_blueprint(api_blueprint)
 
@@ -22,8 +21,7 @@ def create_app():
     register_error_handlers(app)
 
     return app
-
-# ✅ Error Handlers
+  
 def register_error_handlers(app):
     @app.errorhandler(400)
     def bad_request(error):

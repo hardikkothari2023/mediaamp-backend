@@ -11,14 +11,18 @@ from io import TextIOWrapper
 import csv
 from flask_jwt_extended import jwt_required
 from app.models.task_manager import TaskManager
-
+from flasgger.utils import swag_from
+from flask import request, jsonify
+from flask_jwt_extended import create_access_token
+from app.models.user import User   
+from flasgger.utils import swag_from
+from flask import request, jsonify
+from app.models.user import User  
+from app.extensions import db
 
 api_blueprint = Blueprint("api", __name__)
 
-from flasgger.utils import swag_from
-from flask import request, jsonify
-from app.models.user import User  # adjust if needed
-from app.extensions import db
+
 
 @api_blueprint.route("/register", methods=["POST"])
 @swag_from({
@@ -77,12 +81,8 @@ def register():
     db.session.commit()
 
     return jsonify({"message": "User registered successfully"}), 201
+ 
 
-# ✅ User Login
-from flasgger.utils import swag_from
-from flask import request, jsonify
-from flask_jwt_extended import create_access_token
-from app.models.user import User  # adjust this import based on your project structure
 
 @api_blueprint.route("/login", methods=["POST"])
 @swag_from({
@@ -289,11 +289,9 @@ def upload_csv():
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": f"Failed to process CSV: {str(e)}"}), 500
-# ✅ Tasks by Date (with Redis caching + filter only active tasks)
-# ✅ Import TaskManager at the top if not done
+ 
 from app.models.task_manager import TaskManager
-
-# ✅ POST /task - Create a task
+ 
 @api_blueprint.route("/task", methods=["POST"])
 @jwt_required()
 @swag_from({

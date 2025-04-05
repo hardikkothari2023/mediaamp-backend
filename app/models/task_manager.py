@@ -9,9 +9,9 @@ class TaskManager(db.Model):
     status = db.Column(db.Boolean, default=False)
     priority = db.Column(db.String(50))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    assigned_user = db.Column(db.String(255))  # or db.ForeignKey('user.id') if using relations
+    assigned_user = db.Column(db.String(255)) 
 
-    # Relationship to TaskLogger
+    
     logs = db.relationship('TaskLogger', backref='source_task', lazy='dynamic', cascade='all, delete')
 
     def __repr__(self):

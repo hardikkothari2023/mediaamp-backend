@@ -1,18 +1,16 @@
 from flasgger import Swagger
 from app import create_app
-
-# Create the Flask app
+ 
 app = create_app()
-
-# ✅ Use Swagger 2.0 instead of OpenAPI 3.0.x
+ 
 swagger_template = {
-    "swagger": "2.0",  # ❗ Replace "openapi" with "swagger"
+    "swagger": "2.0",  
     "info": {
         "title": "MediaAmp API",
         "description": "API for MediaAmp Backend Task",
         "version": "1.0.0"
     },
-    "securityDefinitions": {  # ❗ In Swagger 2.0 this is 'securityDefinitions' not 'components'
+    "securityDefinitions": {   
         "Bearer": {
             "type": "apiKey",
             "name": "Authorization",

@@ -6,8 +6,10 @@ from app.config import Config
 
 def role_required(required_role):
     def decorator(f):
+        
         @wraps(f)
         def wrapper(*args, **kwargs):
+            
             auth_header = request.headers.get('Authorization')
             if not auth_header:
                 return jsonify({'error': 'Authorization header missing'}), 401
