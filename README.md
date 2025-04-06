@@ -207,7 +207,9 @@ celery -A app.celery_worker.celery worker --loglevel=info
  *Dockerized for Production*
  ## 🤝 Contributing
 Pull requests are welcome! For major changes, please open an issue first to discuss.
-**💬 A Note from the Developer**
+
+
+## 💬 A Note from the Developer
 This backend project was built with scalability, security, and performance in mind — ensuring that every component is production-ready and follows best practices. I sincerely hope it showcases my backend engineering capabilities and aligns with the standards of MediaAmp.
 
-Thank you for reviewing my submission! 🙏
+### Thank you for reviewing my submission! 🙏
